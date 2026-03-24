@@ -1345,6 +1345,9 @@ export default function AreasSection() {
         </motion.div>
 
       </div>
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none" aria-hidden="true">
+  <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(245,166,35,0.25), transparent)" }} />
+</div>
     </section>
   );
 }

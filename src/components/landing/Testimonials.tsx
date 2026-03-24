@@ -217,6 +217,10 @@ export default function Testimonials() {
       aria-label="Parent testimonials"
       className="relative bg-navy-700 section-pad overflow-hidden"
     >
+      <div
+  className="absolute top-0 left-0 right-0 h-20 pointer-events-none"
+  style={{ background: "linear-gradient(180deg, rgba(246,166,35,0.08) 0%, transparent 100%)" }}
+/>
       {/* Background */}
       <div className="absolute inset-0 dot-grid-light opacity-25 pointer-events-none" />
       <div
@@ -575,6 +579,11 @@ export default function Testimonials() {
         </motion.div>
 
       </div>
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none" aria-hidden="true" style={{ lineHeight: 0 }}>
+  <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "56px", display: "block" }}>
+    <path d="M0 56 L0 20 Q360 56 720 28 Q1080 0 1440 36 L1440 56 Z" fill="#FFFFFF" />
+  </svg>
+</div>
     </section>
   );
 }

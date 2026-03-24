@@ -29,16 +29,15 @@ export default function HomePage() {
       <Navbar />
 
       <main id="main-content" aria-label="Main content">
-       
-        <HeroSection/>
-       <TrustBar/>
-       <HowItWorks/>
-       <WhyUs/>
-       <SubjectsSection/>
-       <AreasSection/>
-       <Testimonials/>
-        <FAQ/>
-        <FinalCTA/>
+        <HeroSection />
+        <TrustBar />
+        <HowItWorks />
+        <WhyUs />
+        <SubjectsSection />
+        <AreasSection />
+        <Testimonials />
+        <FAQ />
+        <FinalCTA />
         {/* FinalCTA */}
       </main>
 

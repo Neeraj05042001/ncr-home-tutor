@@ -980,7 +980,7 @@ export default function HeroSection() {
       </div>
 
       {/* Wave divider */}
-      <div
+      {/* <div
         className="absolute bottom-0 left-0 right-0 pointer-events-none"
         aria-hidden="true"
       >
@@ -994,11 +994,43 @@ export default function HeroSection() {
         >
           <path
             d="M0 48 L0 24 Q180 0 360 20 Q540 40 720 16 Q900 0 1080 22 Q1260 44 1440 18 L1440 48 Z"
-            fill="#ffffff"
+            // fill="#ffffff"
+            fill="#F6A623"
+
+          />
+        </svg>
+      </div> */}
+<div
+        className="relative pointer-events-none"
+        aria-hidden="true"
+        style={{ lineHeight: 0, marginTop: "-2px" }}
+      >
+        <svg
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: "100%", height: "clamp(40px, 5vw, 80px)", display: "block" }}
+        >
+          <defs>
+            <linearGradient id="tb-shadow" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="rgba(12,35,64,0.12)" />
+              <stop offset="100%" stopColor="rgba(12,35,64,0)" />
+            </linearGradient>
+          </defs>
+
+          {/* Soft shadow layer for depth */}
+          <path
+            d="M0 0 Q360 80 720 40 Q1080 0 1440 60 L1440 80 L0 80 Z"
+            fill="url(#tb-shadow)"
+          />
+
+          {/* Main fill — HowItWorks surface-3 */}
+          <path
+            d="M0 20 Q360 80 720 46 Q1080 12 1440 66 L1440 80 L0 80 Z"
+            fill="#F6A623"
           />
         </svg>
       </div>
-
       
     </section>
   );

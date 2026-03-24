@@ -444,6 +444,11 @@ export default function FAQ() {
 
         </div>
       </div>
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none" aria-hidden="true" style={{ lineHeight: 0 }}>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "60px", display: "block" }}>
+    <path d="M0 60 L0 40 Q240 0 480 32 Q720 60 960 24 Q1200 0 1440 36 L1440 60 Z" fill="#0A1E37" />
+  </svg>
+</div>
     </section>
   );
 }

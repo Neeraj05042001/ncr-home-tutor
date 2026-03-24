@@ -99,10 +99,10 @@ export default function FinalCTA() {
           background: "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(246,166,35,0.12) 0%, transparent 65%)",
         }}
       />
-      <div
+      {/* <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(90deg, transparent, rgba(246,166,35,0.3), transparent)" }}
-      />
+      /> */}
 
       {/* Floating particles */}
       {PARTICLES.map((p, i) => <Particle key={`particle-${i}`} {...p} />)}
@@ -251,6 +251,12 @@ export default function FinalCTA() {
 
       {/* ── Trust marquee strip ── */}
       <TrustMarquee />
+
+      <div
+  className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+  aria-hidden="true"
+  style={{ background: "linear-gradient(180deg, transparent, #050F1A)" }}
+/>
 
     </section>
   );

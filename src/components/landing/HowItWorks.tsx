@@ -954,6 +954,11 @@ export default function HowItWorks() {
         </motion.div>
 
       </div>
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none" aria-hidden="true" style={{ lineHeight: 0 }}>
+  <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "56px", display: "block" }}>
+    <path d="M0 56 L0 32 Q240 0 480 28 Q720 56 960 20 Q1200 0 1440 30 L1440 56 Z" fill="#0C2340" />
+  </svg>
+</div>
     </section>
   );
 }
