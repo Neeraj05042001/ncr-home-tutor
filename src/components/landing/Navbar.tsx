@@ -14,7 +14,6 @@ import {
 import { cn, PHONE, PHONE_RAW, WA_LINK, DEFAULT_WA_MSG } from "@/lib/utils";
 import { WhatsAppIcon, PhoneIcon } from "@/components/ui/Button";
 
-
 // ─── Nav Items ────────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
@@ -28,7 +27,7 @@ const NAV_LINKS = [
 
 // ─── Framer Motion Variants ────────────────────────────────────────────────
 
-const mobileMenuVariants:Variants = {
+const mobileMenuVariants: Variants = {
   closed: {
     opacity: 0,
     height: 0,
@@ -467,18 +466,18 @@ export default function Navbar() {
                   transition={{ delay: 0.35, duration: 0.4 }}
                   className="grid grid-cols-2 gap-3"
                 >
-                  <a
+                  <Link
                     href={`tel:${PHONE_RAW}`}
                     className={cn(
                       "flex items-center justify-center gap-2",
-                      "bg-navy-700 text-white font-bold text-sm",
+                      "bg-navy-400 text-white font-bold text-sm",
                       "rounded-2xl py-3.5 px-4",
                       "transition-opacity hover:opacity-90",
                     )}
                   >
                     <PhoneIcon size={16} />
                     Call Now
-                  </a>
+                  </Link>
                   <a
                     href={WA_LINK(DEFAULT_WA_MSG)}
                     target="_blank"
@@ -617,7 +616,7 @@ function MobileBottomBar() {
         href={`tel:${PHONE_RAW}`}
         className={cn(
           "flex-1 flex items-center justify-center gap-2",
-          "bg-navy-700 text-white font-bold text-sm",
+          "bg-navy-400 text-white font-bold text-sm",
           "rounded-2xl py-3.5",
           "transition-opacity active:opacity-80",
         )}
