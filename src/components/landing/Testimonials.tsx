@@ -502,11 +502,11 @@ export default function Testimonials() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="mt-12 grid grid-cols-3 divide-x rounded-2xl overflow-hidden"
+          className="mt-12 grid grid-cols-3 divide-x rounded-2xl overflow-hidden divide-y divide-white/10"
           style={{
             background: "rgba(255,255,255,0.05)",
             border: "1px solid rgba(255,255,255,0.1)",
-            divideColor: "rgba(255,255,255,0.1)",
+            
           }}
         >
           {[

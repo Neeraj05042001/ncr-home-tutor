@@ -1040,36 +1040,28 @@ function AreaTag({
   const size  = SIZE_STYLES[area.size];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.75, y: 12 }}
-      animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
-      transition={{
-        delay: index * 0.04,
-        duration: 0.45,
-        ease: [0.34, 1.56, 0.64, 1],
-      }}
-      whileHover={{ scale: 1.1, y: -4 }}
-      whileTap={{ scale: 0.96 }}
-      transition2={{ type: "spring", stiffness: 400, damping: 20 }}
-      className="relative inline-flex items-center gap-2 cursor-default select-none flex-shrink-0"
-      style={{
-        background: style.bg,
-        border: `1px solid ${style.border}`,
-        borderRadius: "999px",
-        padding: `${size.py} ${size.px}`,
-        boxShadow: `0 2px 12px ${style.bg}`,
-      }}
-      onMouseEnter={e => {
-        (e.currentTarget as HTMLElement).style.boxShadow =
-          `0 6px 24px ${style.glow}`;
-        (e.currentTarget as HTMLElement).style.borderColor = style.color;
-      }}
-      onMouseLeave={e => {
-        (e.currentTarget as HTMLElement).style.boxShadow =
-          `0 2px 12px ${style.bg}`;
-        (e.currentTarget as HTMLElement).style.borderColor = style.border;
-      }}
-    >
+   <motion.div
+  initial={{ opacity: 0, scale: 0.75, y: 12 }}
+  animate={inView ? { opacity: 1, scale: 1, y: 0 } : undefined}
+  transition={{
+    delay: index * 0.04,
+    duration: 0.45,
+    ease: [0.34, 1.56, 0.64, 1] as const,
+    type: "spring",
+    stiffness: 400,
+    damping: 20,
+  }}
+  whileHover={{ scale: 1.1, y: -4 }}
+  whileTap={{ scale: 0.96 }}
+  className="relative inline-flex items-center gap-2 cursor-default select-none flex-shrink-0"
+  style={{
+    background: style.bg,
+    border: `1px solid ${style.border}`,
+    borderRadius: "999px",
+    padding: `${size.py} ${size.px}`,
+    boxShadow: `0 2px 12px ${style.bg}`,
+  }}
+>
       {/* Popular pulsing dot */}
       {area.popular && (
         <span className="relative flex-shrink-0 w-2 h-2">

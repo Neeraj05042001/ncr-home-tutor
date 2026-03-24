@@ -9,24 +9,26 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
+  Variants,
 } from "framer-motion";
 import { cn, PHONE, PHONE_RAW, WA_LINK, DEFAULT_WA_MSG } from "@/lib/utils";
 import { WhatsAppIcon, PhoneIcon } from "@/components/ui/Button";
 
+
 // ─── Nav Items ────────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
-  { label: "Home",         href: "/" },
-  { label: "About Us",     href: "/about" },
-  { label: "Subjects",     href: "/#subjects" },
-  { label: "Areas",        href: "/#areas" },
-  { label: "Blog",         href: "/blog" },
-  { label: "Contact",      href: "/#contact" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Subjects", href: "/#subjects" },
+  { label: "Areas", href: "/#areas" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 // ─── Framer Motion Variants ────────────────────────────────────────────────
 
-const mobileMenuVariants = {
+const mobileMenuVariants:Variants = {
   closed: {
     opacity: 0,
     height: 0,
@@ -41,17 +43,43 @@ const mobileMenuVariants = {
 
 const mobileNavItem = {
   closed: { opacity: 0, x: -20 },
-  open:   (i: number) => ({
+  open: (i: number) => ({
     opacity: 1,
     x: 0,
-    transition: { delay: i * 0.07, duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+    transition: {
+      delay: i * 0.1,
+      duration: 0.3,
+      ease: [0.25, 0.1, 0.25, 1] as const,
+    },
   }),
 };
 
+// const announcementVariants = {
+//   hidden: { height: 0, opacity: 0 },
+//   visible: {
+//     height: "auto",
+//     opacity: 1,
+//     transition: { duration: 0.4, ease: "easeOut" },
+//   },
+//   exit: { height: 0, opacity: 0, transition: { duration: 0.3 } },
+// };
 const announcementVariants = {
-  hidden:  { height: 0, opacity: 0 },
-  visible: { height: "auto", opacity: 1, transition: { duration: 0.4, ease: "easeOut" } },
-  exit:    { height: 0, opacity: 0, transition: { duration: 0.3 } },
+  hidden: { height: 0, opacity: 0 },
+  visible: {
+    height: "auto",
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut" as const,
+    },
+  },
+  exit: {
+    height: 0,
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+    },
+  },
 };
 
 // ─── TopBar Component ─────────────────────────────────────────────────────
@@ -103,7 +131,7 @@ function Hamburger({ open, toggle }: { open: boolean; toggle: () => void }) {
         "relative flex flex-col justify-center items-center",
         "w-10 h-10 rounded-xl transition-colors duration-200",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400",
-        open ? "bg-navy-700" : "hover:bg-navy-700/5"
+        open ? "bg-navy-700" : "hover:bg-navy-700/5",
       )}
     >
       <motion.span
@@ -111,18 +139,24 @@ function Hamburger({ open, toggle }: { open: boolean; toggle: () => void }) {
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
           "block w-5 h-0.5 rounded-full mb-1.5 transition-colors",
-          open ? "bg-white" : "bg-navy-700"
+          open ? "bg-white" : "bg-navy-700",
         )}
       />
       <motion.span
         animate={open ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
         transition={{ duration: 0.2 }}
-        className={cn("block w-5 h-0.5 rounded-full mb-1.5", open ? "bg-white" : "bg-navy-700")}
+        className={cn(
+          "block w-5 h-0.5 rounded-full mb-1.5",
+          open ? "bg-white" : "bg-navy-700",
+        )}
       />
       <motion.span
         animate={open ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-        className={cn("block w-5 h-0.5 rounded-full", open ? "bg-white" : "bg-navy-700")}
+        className={cn(
+          "block w-5 h-0.5 rounded-full",
+          open ? "bg-white" : "bg-navy-700",
+        )}
       />
     </button>
   );
@@ -149,7 +183,7 @@ function NavLink({
         "relative text-sm font-semibold px-1 py-1",
         "transition-colors duration-200",
         "group focus-visible:outline-none",
-        active ? "text-navy-700" : "text-ink-secondary hover:text-navy-700"
+        active ? "text-navy-700" : "text-ink-secondary hover:text-navy-700",
       )}
     >
       {label}
@@ -169,13 +203,13 @@ function NavLink({
 // ─── Main Navbar ─────────────────────────────────────────────────────────────
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen]       = useState(false);
-  const [scrolled, setScrolled]           = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [topBarVisible, setTopBarVisible] = useState(true);
-  const [hidden, setHidden]               = useState(false);
+  const [hidden, setHidden] = useState(false);
 
-  const pathname  = usePathname();
-  const lastY     = useRef(0);
+  const pathname = usePathname();
+  const lastY = useRef(0);
   const { scrollY } = useScroll();
 
   // Hide/show navbar on scroll up/down, with topbar dismiss
@@ -208,7 +242,9 @@ export default function Navbar() {
   // Prevent body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   const isActive = (href: string) => {
@@ -234,12 +270,11 @@ export default function Navbar() {
           "transition-all duration-300",
           scrolled
             ? "bg-white/95 backdrop-blur-xl shadow-[0_2px_20px_rgba(12,35,64,0.1)] border-b border-border"
-            : "bg-white border-b border-border/50"
+            : "bg-white border-b border-border/50",
         )}
       >
         <div className="container-custom">
           <div className="flex items-center justify-between h-[68px] gap-4">
-
             {/* ── Logo ── */}
             <Link
               href="/"
@@ -301,7 +336,7 @@ export default function Navbar() {
                   "text-navy-700 font-semibold text-sm",
                   "border-2 border-navy-700/20 rounded-full px-4 py-2.5",
                   "hover:border-navy-700/60 hover:bg-navy-700/5",
-                  "transition-all duration-200"
+                  "transition-all duration-200",
                 )}
               >
                 <PhoneIcon size={15} />
@@ -313,14 +348,17 @@ export default function Navbar() {
                 href={WA_LINK(DEFAULT_WA_MSG)}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.03, boxShadow: "0 8px 28px rgba(37,211,102,0.4)" }}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: "0 8px 28px rgba(37,211,102,0.4)",
+                }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 className={cn(
                   "inline-flex items-center gap-2",
                   "bg-whatsapp text-white font-bold text-sm",
                   "rounded-full px-5 py-2.5",
-                  "transition-colors duration-200"
+                  "transition-colors duration-200",
                 )}
               >
                 <WhatsAppIcon size={16} />
@@ -330,7 +368,10 @@ export default function Navbar() {
               {/* Book Demo CTA */}
               <motion.a
                 href="#book-demo"
-                whileHover={{ scale: 1.03, boxShadow: "0 8px 28px rgba(246,166,35,0.4)" }}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: "0 8px 28px rgba(246,166,35,0.4)",
+                }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 className={cn(
@@ -338,7 +379,7 @@ export default function Navbar() {
                   "bg-saffron-400 text-navy-700 font-bold text-sm",
                   "rounded-full px-5 py-2.5",
                   "relative overflow-hidden",
-                  "transition-colors duration-200 hover:bg-saffron-500"
+                  "transition-colors duration-200 hover:bg-saffron-500",
                 )}
               >
                 <span className="relative z-10">Free Demo</span>
@@ -373,7 +414,6 @@ export default function Navbar() {
                 toggle={() => setMobileOpen((o) => !o)}
               />
             </div>
-
           </div>
         </div>
 
@@ -389,7 +429,6 @@ export default function Navbar() {
               className="lg:hidden overflow-hidden bg-white border-t border-border"
             >
               <div className="container-custom py-4 pb-6">
-
                 {/* Nav links */}
                 <nav className="mb-5" aria-label="Mobile navigation">
                   {NAV_LINKS.map(({ label, href }, i) => (
@@ -409,7 +448,7 @@ export default function Navbar() {
                           "text-base font-semibold transition-colors duration-150",
                           isActive(href)
                             ? "text-navy-700"
-                            : "text-ink-secondary hover:text-navy-700"
+                            : "text-ink-secondary hover:text-navy-700",
                         )}
                       >
                         <span>{label}</span>
@@ -434,7 +473,7 @@ export default function Navbar() {
                       "flex items-center justify-center gap-2",
                       "bg-navy-700 text-white font-bold text-sm",
                       "rounded-2xl py-3.5 px-4",
-                      "transition-opacity hover:opacity-90"
+                      "transition-opacity hover:opacity-90",
                     )}
                   >
                     <PhoneIcon size={16} />
@@ -448,7 +487,7 @@ export default function Navbar() {
                       "flex items-center justify-center gap-2",
                       "bg-whatsapp text-white font-bold text-sm",
                       "rounded-2xl py-3.5 px-4",
-                      "transition-opacity hover:opacity-90"
+                      "transition-opacity hover:opacity-90",
                     )}
                   >
                     <WhatsAppIcon size={16} />
@@ -519,7 +558,7 @@ function FloatingWhatsApp() {
             className={cn(
               "bg-white text-ink font-semibold text-sm",
               "px-3.5 py-2 rounded-xl shadow-pop",
-              "border border-border whitespace-nowrap"
+              "border border-border whitespace-nowrap",
             )}
           >
             💬 Chat with us
@@ -534,8 +573,15 @@ function FloatingWhatsApp() {
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
         animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-        whileHover={{ scale: 1.12, boxShadow: "0 12px 40px rgba(37,211,102,0.55)" }}
+        transition={{
+          duration: 3.5,
+          repeat: Infinity,
+          ease: [0.42, 0, 0.58, 1],
+        }}
+        whileHover={{
+          scale: 1.12,
+          boxShadow: "0 12px 40px rgba(37,211,102,0.55)",
+        }}
         whileTap={{ scale: 0.95 }}
         className="relative flex items-center justify-center w-14 h-14 bg-whatsapp rounded-full shadow-wa"
       >
@@ -564,7 +610,7 @@ function MobileBottomBar() {
         "flex items-center gap-2.5 p-3",
         "bg-white/95 backdrop-blur-xl border-t border-border",
         "shadow-[0_-4px_24px_rgba(12,35,64,0.12)]",
-        "lg:hidden" // hide on desktop
+        "lg:hidden", // hide on desktop
       )}
     >
       <a
@@ -573,7 +619,7 @@ function MobileBottomBar() {
           "flex-1 flex items-center justify-center gap-2",
           "bg-navy-700 text-white font-bold text-sm",
           "rounded-2xl py-3.5",
-          "transition-opacity active:opacity-80"
+          "transition-opacity active:opacity-80",
         )}
       >
         <PhoneIcon size={16} />
@@ -587,7 +633,7 @@ function MobileBottomBar() {
           "flex-1 flex items-center justify-center gap-2",
           "bg-whatsapp text-white font-bold text-sm",
           "rounded-2xl py-3.5",
-          "transition-opacity active:opacity-80"
+          "transition-opacity active:opacity-80",
         )}
       >
         <WhatsAppIcon size={16} />
@@ -599,7 +645,7 @@ function MobileBottomBar() {
           "flex-1 flex items-center justify-center gap-2",
           "bg-saffron-400 text-navy-700 font-bold text-sm",
           "rounded-2xl py-3.5",
-          "transition-opacity active:opacity-80 relative overflow-hidden"
+          "transition-opacity active:opacity-80 relative overflow-hidden",
         )}
       >
         <span className="relative z-10">Free Demo</span>
