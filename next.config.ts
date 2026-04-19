@@ -1,20 +1,41 @@
-import type { NextConfig } from 'next'
+// import type { NextConfig } from "next";
+
+// const nextConfig: NextConfig = {
+//   // Static export for Cloudflare Pages deployment
+//   output: "export",
+
+//   // Clean URLs
+//   trailingSlash: true,
+
+//   // Images — unoptimized required for static export
+//   images: {
+//     unoptimized: true,
+//   },
+
+//   // Empty turbopack config — silences the webpack/turbopack conflict warning
+//   // SVG icons are written as inline React components — no webpack plugin needed
+//   turbopack: {},
+// };
+
+// export default nextConfig;
+
+
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Static export for Cloudflare Pages deployment
-  output: 'export',
+  // No output: "export" — Vercel runs Next.js natively
+  
+  turbopack: {},
 
-  // Clean URLs
-  trailingSlash: true,
-
-  // Images — unoptimized required for static export
   images: {
-    unoptimized: true,
+    unoptimized: true, // keep your existing setting
   },
 
-  // Empty turbopack config — silences the webpack/turbopack conflict warning
-  // SVG icons are written as inline React components — no webpack plugin needed
-  turbopack: {},
-}
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb", // needed for ID proof file uploads
+    },
+  },
+};
 
-export default nextConfig
+export default nextConfig;
