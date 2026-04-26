@@ -46,9 +46,7 @@
 //   );
 // }
 
-
 import type { Metadata } from "next";
-
 
 import Footer from "@/components/landing/Footer";
 import HeroSection from "@/components/landing/HeroSection";
@@ -61,7 +59,6 @@ import Testimonials from "@/components/landing/Testimonials";
 import FAQ from "@/components/landing/FAQ";
 import FinalCTA from "@/components/landing/FinalCTA";
 import Navbar from "@/components/landing/Navbar";
-
 
 // Page-level SEO override
 export const metadata: Metadata = {
@@ -76,24 +73,25 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <>
-     
-      <Navbar/>
+    <section className="">
+      
+        <Navbar />
 
-      <main id="main-content" aria-label="Main content">
-        <HeroSection />
-        {/* <TrustBar /> */}
-        <HowItWorks />
-        <WhyUs />
-        <SubjectsSection />
-        <AreasSection />
-        <Testimonials />
-        <FAQ />
-        <FinalCTA />
-        {/* FinalCTA */}
-      </main>
+        <main id="main-content" aria-label="Main content">
+          <HeroSection />
+          <TrustBar />
+          <HowItWorks />
+          <WhyUs />
+          <SubjectsSection />
+          <AreasSection />
+          <Testimonials />
+          <FAQ />
+          <FinalCTA />
+          {/* FinalCTA */}
+        </main>
 
-      <Footer />
-    </>
+        <Footer />
+    
+    </section>
   );
 }
